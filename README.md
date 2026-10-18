@@ -5,15 +5,11 @@ One self-contained page: `src/index.src.html` plus the fonts and images in `asse
 
 ## Deploy
 
-Every push to `main` builds the page and publishes it to the server through
-`.github/workflows/deploy.yml` (nginx, `/var/www/portfolio`).
+The server checks this repository every minute and publishes each new push to `main`
+(nginx, `/var/www/portfolio`). One-time setup on the server:
 
-Repository secrets the workflow needs (Settings → Secrets and variables → Actions):
-
-| Secret | Value |
-|---|---|
-| `SSH_HOST` | server IP |
-| `SSH_USER` | ssh user |
-| `SSH_PASSWORD` | that user's password |
+```
+curl -fsSL https://raw.githubusercontent.com/rea1706-max/potfolio/main/deploy/install.sh | sudo bash
+```
 
 Live: http://82.115.51.36/
