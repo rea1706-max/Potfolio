@@ -1,0 +1,39 @@
+name: Deploy portfolio
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build index.html
+        run: python3 build.py
+
+      - name: Copy files to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          source: "index.html,favicon.ico,deploy/nginx.conf,deploy/setup.sh"
+          target: "~/portfolio-release"
+
+      - name: Publish on server
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          DEPLOY_PASS: ${{ secrets.SSH_PASSWORD }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          envs: DEPLOY_PASS
+          script: bash ~/portfolio-release/deploy/setup.sh
