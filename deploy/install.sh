@@ -23,11 +23,7 @@ cd /opt/portfolio-src
 git fetch -q --depth 1 origin main
 if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ] || [ ! -f /var/www/portfolio/index.html ]; then
   git reset -q --hard origin/main
-  mkdir -p /var/www/portfolio
-  cp index.html favicon.ico /var/www/portfolio/
-  cp deploy/nginx.conf /etc/nginx/sites-available/portfolio
-  ln -sf /etc/nginx/sites-available/portfolio /etc/nginx/sites-enabled/portfolio
-  nginx -t && systemctl reload nginx
+  sh deploy/publish.sh
   echo "$(date -Is) published $(git rev-parse --short HEAD)"
 fi
 UPD

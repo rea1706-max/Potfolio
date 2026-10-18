@@ -15,13 +15,14 @@ rep = {
     'PF_CORM': b64(F / 'cormorant-garamond-latin-500-normal.woff2'), 'PF_DM': b64(F / 'dm-sans-latin-400-normal.woff2'),
     'PF_PLAY': b64(F / 'playfair-display-latin-400-normal.woff2'), 'PF_INTER': b64(F / 'inter-latin-400-normal.woff2'),
     'PF_PRATA': b64(F / 'prata-latin-400-normal.woff2'), 'PF_GOLOS': b64(F / 'golos-text-latin-400-normal.woff2'),
+    'PF_ZEN': b64(F / 'zen-kaku-gothic-new-latin-400-normal.woff2'), 'PF_SHIP': b64(F / 'shippori-mincho-latin-400-normal.woff2'),
     'PARD': img(I / 'pard2.png'), 'MASK': img(I / 'bant_mask.png'), 'BGSOFT': img(I / 'bgsoft.png'),
     'RELIEF': img(I / 'relief.jpg'), 'DUNE1': img(I / 'dune1.png'), 'DUNE2': img(I / 'dune2.png'),
     'AMBER': img(I / 'amber.png'), 'FAV': img(I / 'fav.png'), 'FAV180': img(I / 'fav180.png'),
     'META': (I / 'bant_meta.json').read_text(),
     'TEMPO': img(P / 'tp0.jpg'), 'USTY': img(P / 'usty_cover.jpg'),
 }
-for k in ['SAV0', 'SAV1', 'SAV2', 'SAV3', 'PL0', 'PL1', 'PL2', 'US1', 'US2', 'US3', 'TP1', 'TP2', 'TP3']:
+for k in ['SAV0', 'SAV1', 'SAV2', 'SAV3', 'PL0', 'PL1', 'PL2', 'US1', 'US2', 'US3', 'TP1', 'TP2', 'TP3', 'YO0', 'YO1', 'YO2']:
     rep[k] = img(P / (k.lower() + '.jpg'))
 s = (R / 'src/index.src.html').read_text()
 for k, v in rep.items():
