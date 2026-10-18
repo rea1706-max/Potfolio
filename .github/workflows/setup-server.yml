@@ -1,0 +1,26 @@
+name: Setup server
+
+# Run once by hand (Actions → Setup server → Run workflow).
+# Installs nginx on the server and turns on auto-publishing of every push to main.
+on:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run deploy/install.sh on the server
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          DEPLOY_PASS: ${{ secrets.SSH_PASSWORD }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          envs: DEPLOY_PASS
+          command_timeout: 20m
+          script: |
+            set -e
+            curl -fsSL https://raw.githubusercontent.com/rea1706-max/Potfolio/main/deploy/install.sh -o /tmp/portfolio-install.sh
+            echo "$DEPLOY_PASS" | sudo -S -p '' bash /tmp/portfolio-install.sh
+            free -h
