@@ -70,7 +70,7 @@ body[data-theme="light"] .logo{filter:brightness(.12) sepia(.4)}
 
 /* ---------- hero ---------- */
 #hero{position:relative;height:600vh;z-index:3}
-.stage{position:sticky;top:0;height:100vh;min-height:520px;overflow:visible;pointer-events:none}
+.stage{position:sticky;top:0;height:var(--vh,100vh);min-height:520px;overflow:visible;pointer-events:none}
 .stage a,.stage button{pointer-events:auto}
 #mf{position:absolute;left:50%;transform:translateX(-50%);width:min(calc(100vw - 2*var(--m)),36em);text-align:center;font:300 clamp(19px,1.3vw + 9px,33px)/1.5 var(--serif);color:rgba(246,239,226,.96);pointer-events:none;letter-spacing:.005em;text-shadow:0 1px 14px rgba(28,10,8,.55),0 0 2px rgba(28,10,8,.35)}
 #mf .ln{display:block;margin:0 0 .5em;text-wrap:balance}
@@ -119,7 +119,7 @@ body.ready .hm,body.ready .cue{opacity:1}
 
 /* ---------- works ---------- */
 #work{position:relative}
-.wk-pin{position:sticky;top:0;height:100vh;overflow:hidden}
+.wk-pin{position:sticky;top:0;height:var(--vh,100vh);overflow:hidden}
 .wk-track{position:absolute;left:0;top:0;height:100%;display:flex;align-items:center;gap:clamp(30px,4.5vw,84px);padding:0 var(--m);will-change:transform}
 .wk-head{flex:none;padding-right:2vw;white-space:nowrap}
 .wk-head .caps{color:rgba(232,214,186,.7);margin-bottom:3vh;padding-left:.4vw}
@@ -152,7 +152,7 @@ body.ready .hm,body.ready .cue{opacity:1}
 
 /* ---------- approach: a pinned story in three beats; the giant word answers the cursor ---------- */
 #approach{position:relative;height:380vh}
-.ap-stage{position:sticky;top:0;height:100vh;overflow:hidden}
+.ap-stage{position:sticky;top:0;height:var(--vh,100vh);overflow:hidden}
 /* left: label, title, statement share one left edge; right: the drawing above, the beat under it, on one left edge */
 .ap-head{position:absolute;left:var(--m);top:24vh;width:calc((100vw - 2*var(--m))*5/12)}
 .ap-head .caps{color:rgba(232,214,186,.72);margin-bottom:2.2vh}
@@ -302,6 +302,43 @@ body.caseon #hdr,body.caseon .key,body.caseon .kn{visibility:hidden}
   .sec-head{grid-column:1/-1;position:static;margin-bottom:8vh}.make{grid-column:1/-1}.index .tool{grid-template-columns:1fr}  .ap-head{top:13vh;width:auto;right:var(--m)}.ap-beats{left:var(--m);width:auto;right:var(--m);top:70vh}.ap-yy{left:var(--m);right:auto;width:auto;text-align:left;top:clamp(220px,32vh,300px)}.ap-beats{left:var(--m);width:auto;bottom:110px}  .pc:nth-child(even),.pc:nth-child(odd){margin-top:0}.pc{width:78vw}
   .cap{grid-template-columns:auto 1fr}.cap .open{grid-column:2;justify-self:start;margin-top:14px}
   .cs-meta{grid-template-columns:1fr 1fr}.cs-sub{grid-column:1/-1}.cs-h,.cs-body{grid-column:1/-1}.cs-h{margin-bottom:4vh}.cs-steps{grid-template-columns:1fr}.cs-gal{grid-template-columns:1fr}.cs-gal .fr:first-child .crop{aspect-ratio:1.2}
+}
+
+/* ---------- phones ---------- */
+@media (max-width:699px){
+  #hero{height:480vh}
+  .wk-pin{position:relative;height:auto;overflow:visible}
+  .wk-track{position:relative;height:auto;flex-direction:column;align-items:stretch;gap:76px;padding:16vh var(--m) 12vh;transform:none!important}
+  .wk-head{white-space:normal;padding-right:0}
+  .wk-head h2{font-size:clamp(78px,24vw,104px)}
+  .pc,.pc:nth-child(even),.pc:nth-child(odd){width:100%;margin-top:0;transform:none!important;opacity:1!important}
+  .im img{left:0;top:0;width:100%;height:100%;transform:none!important}
+  .cap{grid-template-columns:auto 1fr;gap:0 14px}
+  .cap .open{grid-column:2;justify-self:start;margin-top:16px}
+  .cap .sub{max-width:none}
+  .wk-prog{display:none}
+  #hdr::before{content:"";position:absolute;left:0;right:0;top:0;height:112px;background:linear-gradient(to bottom,rgba(30,13,11,.58),rgba(30,13,11,.3) 55%,rgba(30,13,11,0));-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent);opacity:0;transition:opacity .6s}
+  body.docked #hdr::before{opacity:1}
+  #cbody,#cbody .cs-info,#cbody .cs-info>div,#cbody .cs-lead{grid-template-columns:minmax(0,1fr);column-gap:0}
+  #cbody>*,#cbody .cs-info>*,#cbody .cs-info>div>*,#cbody .cs-lead>*{grid-column:1/-1}
+  #cbody .cs-meta{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .create li .tag{display:none}
+  #contact{padding-top:92px}
+  .pm{height:clamp(104px,15vh,140px)}
+  #contact .caps.eye{margin-top:3vh}
+  #contact h2{margin-top:2.4vh;font-size:clamp(30px,8.6vw,38px)}
+  .mail{margin-top:4.5vh;gap:18px}
+  .mail .addr{font-size:clamp(20px,6vw,26px)}
+  .tgu{font-size:clamp(20px,6vw,26px)}
+  .cs-t{font-size:clamp(72px,22vw,96px)}
+  .cs-sub{font-size:20px}
+  .cs-lead p{font-size:18px;line-height:1.5}
+  .cs-meta{gap:22px 18px}
+  .cs-meta span{font-size:16px}
+  .cs-fonts .row{flex-direction:column;align-items:flex-start;gap:8px}
+  .cs-fonts .nm{font-size:clamp(30px,9vw,40px)}
+  .cs-info{margin-top:10vh;row-gap:8vh}
+  .cs-info .cs-pal{flex-wrap:wrap}.cs-info .cs-pal i{flex:0 0 calc((100% - 20px)/3)}
 }
 </style>
 </head>
@@ -458,7 +495,7 @@ const H=document.documentElement,B=document.body;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,coarse=matchMedia('(hover: none)').matches;
 const IMG={tempo:"{{TEMPO}}",usty:"{{USTY}}",sav:"{{SAV0}}",sav1:"{{SAV1}}",sav2:"{{SAV2}}",sav3:"{{SAV3}}",pl:"{{PL0}}",pl1:"{{PL1}}",pl2:"{{PL2}}",us1:"{{US1}}",us2:"{{US2}}",us3:"{{US3}}",tp1:"{{TP1}}",tp2:"{{TP2}}",tp3:"{{TP3}}",yo0:"{{YO0}}",yo1:"{{YO1}}",yo2:"{{YO2}}"};
 const META={{META}},MASK_SRC="{{MASK}}",SOFT_SRC="{{BGSOFT}}",REL_SRC="{{RELIEF}}",D1_SRC="{{DUNE1}}",D2_SRC="{{DUNE2}}",AMB_SRC="{{AMBER}}";
-let lenis=null,vw=innerWidth,vh=innerHeight;
+let lenis=null,vw=innerWidth,vh=innerHeight;const MOB=matchMedia('(hover: none) and (pointer: coarse)').matches||innerWidth<700;document.documentElement.style.setProperty('--vh',vh+'px');
 
 /* ===== PROJECTS: add one object here and the gallery + case page are built from it ===== */
 /* Each case page opens in the colours of its own project:
@@ -504,7 +541,7 @@ function layoutHero(){
   const ph=clamp(vh*.24,150,230);pard.style.height=ph+'px';pard.style.width=ph*288/582+'px';
   pard.style.left=(vw/2-ph*288/582/2)+'px';pard.style.top=(vh/2-ph*.56)+'px';
   const lw=Math.min(120,vw*.3);loader.style.width=lw+'px';loader.style.left=(vw/2-lw/2)+'px';loader.style.top=(vh/2+ph*.44+28)+'px';
-  lcap.style.width='400px';lcap.style.left=(vw/2-200)+'px';lcap.style.top=(vh/2+ph*.44+48)+'px';
+  lcap.style.width=Math.min(400,vw)+'px';lcap.style.left=(vw/2-Math.min(400,vw)/2)+'px';lcap.style.top=(vh/2+ph*.44+48)+'px';
   L.nameCx=vw/2;L.nameCy=L.oy1+NH*k/2;
 }
 function place(ox,oy,sc=1){L.curCx=ox+W*k*sc/2;L.curCy=oy+NH*k*sc/2;nameEl.style.transform=`translate3d(${(ox-BX*k*sc).toFixed(2)}px,${(oy-BY*k*sc).toFixed(2)}px,0) scale(${sc.toFixed(4)})`}
@@ -594,10 +631,13 @@ const A_IN=[.17,.52],O_OUT=[.6,.75];      // text rises / text leaves (fractions
 function layoutMF(){
   const sT=vw<700?.6:.5,x0=Math.min(0,LEADMIN);
   MS_.sT=sT;MS_.oxT=(vw-(W-x0)*k*sT)/2-x0*k*sT;MS_.oyT=Math.max(vw<700?70:60,vh*.08);
-  const top=MS_.oyT+NH*k*sT+Math.max(26,vh*.045);
+  let top=MS_.oyT+NH*k*sT+Math.max(26,vh*.045);
   mf.style.fontSize='';mf.style.top=top+'px';
   let fs=parseFloat(getComputedStyle(mf).fontSize);
   for(let i=0;i<12&&mf.offsetHeight>vh-top-40;i++){fs*=.94;mf.style.fontSize=fs+'px'}
+  // phones: the name and the text sit together in the middle of the screen, not pressed to the top
+  if(vw<700){const blk=NH*k*sT+Math.max(26,vh*.045)+mf.offsetHeight,oy=Math.round((vh-blk)/2-vh*.03);
+    if(oy>MS_.oyT){MS_.oyT=oy;top=MS_.oyT+NH*k*sT+Math.max(26,vh*.045);mf.style.top=top+'px'}}
   const tops=[];words.forEach(w=>{const t=Math.round(w.el.offsetTop/4)*4;if(!tops.includes(t))tops.push(t)});tops.sort((a,b)=>a-b);nLines=tops.length;
   words.forEach((w,i)=>{w.line=tops.indexOf(Math.round(w.el.offsetTop/4)*4);w.st=A_IN[0]+(A_IN[1]-A_IN[0]-.07)*(i/(words.length-1))});
   // words appear in reading order; every letter of the roles is given one real letter of the text,
@@ -617,7 +657,7 @@ function layoutMF(){
     if(!r.gh){r.gh=document.createElement('span');r.gh.className='gh';stage.appendChild(r.gh)}
     const g=r.gh.style;r.gh.textContent=t.c.textContent;g.left=(b.left-srr.left)+'px';g.top=(b.top-srr.top)+'px';
     g.font=tcs.font;g.color=tcs.color;g.textShadow=tcs.textShadow;
-    const arrive=words[t.wi].st+.06;r.dur=.16;r.st=Math.max(.008,arrive-r.dur);r.dur=arrive-r.st;
+    const arrive=words[t.wi].st+.06;r.dur=vw<700?.1:.16;r.st=Math.max(.008,arrive-r.dur);r.dur=arrive-r.st;
   });
   rl.forEach(r=>{if(!r.el.textContent.trim()){r.tx=0;r.ty=0;r.st=0;r.dur=.04;r.sc=1}});
   keys.forEach(kk=>{kk.line=words[kk.wi].line;kk.st=words[kk.wi].st;kk.el.style.fontSize='100px';kk.el.style.letterSpacing='0px';
@@ -828,7 +868,7 @@ function drawMask(now){
   mctx.globalAlpha=1;
 }
 addEventListener('pointermove',e=>{if(e.pointerType==='mouse'||e.pointerType==='pen'||!e.pointerType){userMoved=true;ghost=null;pushPt(e.clientX,e.clientY,performance.now()/1000)}},{passive:true});
-addEventListener('touchmove',e=>{const t=e.touches[0];if(t){userMoved=true;ghost=null;pushPt(t.clientX,t.clientY,performance.now()/1000)}},{passive:true});
+addEventListener('touchmove',()=>{userMoved=true},{passive:true});
 addEventListener('touchend',()=>{ptr.has=false},{passive:true});
 document.addEventListener('mouseleave',()=>{ptr.has=false});
 
@@ -887,9 +927,9 @@ function buildWork(){
   track.innerHTML='<div class="wk-head"><div class="caps">'+T.selected+'</div><h2>'+T.works+'</h2></div>'+PROJECTS.map((p,i)=>`<article class="pc" data-i="${i}"><div class="fr" style="--fl:${p.frame.fl};--fl2:${p.frame.fl2};--fm:${p.frame.fm};--fd:${p.frame.fd}"><div class="im" data-id="${p.id}"><img src="${p.img}" alt="${p.title}"></div></div><div class="cap"><span class="num">${String(i+1).padStart(2,'0')}</span><div><h3>${p.title}</h3><p class="cat">${p.cat}</p><p class="sub">${p.sub}</p>${p.url?`<a class="visit" href="${p.url}" target="_blank" rel="noopener">${T.visit} <span>↗</span></a>`:''}</div><button class="pill open" data-id="${p.id}" type="button">${T.open}</button></div></article>`).join('')+'<article class="pc pc-end"><div class="fr"><a class="im" href="#contact"><span class="ring">+</span></a></div><div class="cap"><span class="num"></span><div><h3>'+T.yours+'</h3><p class="sub">'+nb(T.yoursSub)+'</p></div></div></article>';
   $$('.im[data-id]',track).forEach(el=>el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--lx',(e.clientX-r.left)+'px');el.style.setProperty('--ly',(e.clientY-r.top)+'px')}));
 }
-function layoutWork(){trackW=track.scrollWidth;workEl.style.height=Math.max(vh*1.5,trackW-vw+vh)+'px';cards=$$('.pc',track).map(el=>({el,img:$('img',el)}))}
+function layoutWork(){if(vw<700){workEl.style.height='';track.style.transform='';cards=$$('.pc',track).map(el=>({el,img:$('img',el)}));cards.forEach(c=>{c.el.style.transform='';c.el.style.opacity='';if(c.img)c.img.style.transform=''});trackW=0;return}trackW=track.scrollWidth;workEl.style.height=Math.max(vh*1.5,trackW-vw+vh)+'px';cards=$$('.pc',track).map(el=>({el,img:$('img',el)}))}
 function setWork(){
-  const q=workEl.getBoundingClientRect();if(q.bottom<-100||q.top>vh+100)return;
+  if(vw<700)return;const q=workEl.getBoundingClientRect();if(q.bottom<-100||q.top>vh+100)return;
   const p=clamp(-q.top/(q.height-vh)),tx=-p*(trackW-vw);
   track.style.transform=`translate3d(${tx}px,0,0)`;wkp.style.transform=`scaleX(${p})`;wkp.parentElement.style.opacity=(1-sstep(.96,1,p)).toFixed(3);
   cards.forEach(c=>{const r=c.el.getBoundingClientRect(),d=((r.left+r.width/2)-vw/2)/vw,ad=Math.min(1,Math.abs(d));
@@ -1044,10 +1084,11 @@ function frame(ts){
   renderGL(now);
 }
 function layout(){
-  vw=innerWidth;vh=innerHeight;layoutHero();logoDrawn=false;layoutMF();layoutWork();layoutAP();measure();initMask();
+  vw=innerWidth;vh=innerHeight;document.documentElement.style.setProperty('--vh',vh+'px');layoutHero();logoDrawn=false;layoutMF();layoutWork();layoutAP();measure();initMask();
   if(finished)place(L.ox1,L.oy1);
 }
-let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(layout,150)});
+// on phones the address bar changes the height while scrolling: only a new width (rotation) relayouts
+let rz;addEventListener('resize',()=>{if(MOB&&innerWidth===vw)return;clearTimeout(rz);rz=setTimeout(layout,150)});
 
 async function boot(){
   history.scrollRestoration='manual';scrollTo(0,0);if(ST.skip)document.documentElement.classList.remove('lock');
