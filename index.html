@@ -318,6 +318,8 @@ body.caseon #hdr,body.caseon .key,body.caseon .kn{visibility:hidden}
   .cap .open{grid-column:2;justify-self:start;margin-top:16px}
   .cap .sub{max-width:none}
   .wk-prog{display:none}
+  .hm.l{position:fixed;bottom:24px;z-index:46}
+  .cue{position:fixed;bottom:60px;z-index:46}
   #hdr::before{content:"";position:absolute;left:0;right:0;top:0;height:112px;background:linear-gradient(to bottom,rgba(30,13,11,.58),rgba(30,13,11,.3) 55%,rgba(30,13,11,0));-webkit-backdrop-filter:none;backdrop-filter:none;-webkit-mask-image:none;mask-image:none;bottom:auto;opacity:0;transition:opacity .6s}
   #case .x{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(20,12,10,.72)}
   #case::after{mix-blend-mode:normal;opacity:.1}
@@ -756,37 +758,42 @@ float lum(vec3 c){return dot(c,vec3(.299,.587,.114));}
 void main(){
   vec2 p=vP;float A=uRes.x/uRes.y;
   vec2 drift=vec2(sin(uT*.05),cos(uT*.043))*.006;
-  float org=vn(p*vec2(A,1.)*3.1+uT*.02)*.6+vn(p*vec2(A,1.)*7.3)*.4;
   // 1 burgundy light (hero)
   vec3 bur=texture2D(uSoft,cover(p,A,.43-uScroll*.006)+drift).rgb*1.12+vec3(.012,.004,.004);
   vec2 q=(p*uRes-uC)/vec2(uRes.x*.34,uRes.y*.26);
   bur*=1.-uDim*.32*exp(-dot(q,q)*1.4);
   // 2 dark dune (works), 3 pale dune (systems)
   // the dunes, graded into the brown-gold of the palette (#412A24 · #685648 · #D9C4A2)
-  float l2=lum(texture2D(uD2,cover(p,A,.6)+drift*.6).rgb)*1.25;
-  float l1=lum(texture2D(uD1,cover(p,A,.58)+drift*.6).rgb)*1.15;
-  vec2 gq=(p-vec2(.5,.48))*vec2(A,1.);float glow=exp(-dot(gq,gq)*2.2);
+  vec2 gq=(p-vec2(.5,.48))*vec2(A,1.);
   vec3 c0=vec3(.141,.090,.075),c1=vec3(.255,.165,.141),c2=vec3(.408,.337,.282),c3=vec3(.60,.50,.39),c4=vec3(.73,.63,.50);
-  vec3 d2=mix(c0,c1,smoothstep(.0,.12,l2));d2=mix(d2,c2,smoothstep(.12,.32,l2));d2=mix(d2,c3,smoothstep(.32,.55,l2));d2=mix(d2,c4,smoothstep(.55,.8,l2));
+  vec3 d2=c1;
+  if(uS1>.0005||uS2>.0005){
+  float l2=lum(texture2D(uD2,cover(p,A,.6)+drift*.6).rgb)*1.25;
+  float glow=exp(-dot(gq,gq)*2.2);
+  d2=mix(c0,c1,smoothstep(.0,.12,l2));d2=mix(d2,c2,smoothstep(.12,.32,l2));d2=mix(d2,c3,smoothstep(.32,.55,l2));d2=mix(d2,c4,smoothstep(.55,.8,l2));
   d2=mix(d2,d2*1.12+vec3(.02,.016,.012),glow*.5);
   // the sand's light comes in last and slowly, so the change never flashes
-  d2=mix(mix(c1,d2,.55),d2,smoothstep(.45,1.,uS1));
+  d2=mix(mix(c1,d2,.55),d2,smoothstep(.45,1.,uS1));}
   // warm brown glow for Approach (#412A24 -> #685648 in the centre)
   vec3 brown=mix(vec3(.235,.150,.128),vec3(.40,.33,.275),exp(-dot(gq*vec2(.8,1.),gq*vec2(.8,1.))*2.6));
   brown=mix(brown,d2,.18);
   // light sand for About
   // amber gradient for About (her photo, soft light at true proportion)
-  vec3 amb=texture2D(uAmb,cover(p,A,.42)+drift*1.4).rgb*1.1+vec3(.02,.014,.006);
+  vec3 amb=vec3(.56,.45,.35);
+  if(uS6>.0005||uS3>.0005||uS4>.0005){
+  amb=texture2D(uAmb,cover(p,A,.42)+drift*1.4).rgb*1.1+vec3(.02,.014,.006);
   // softer amber: a little less saturation and contrast, so the light reads as a gentle gradient
-  amb=mix(amb,vec3(lum(amb))*vec3(1.1,.97,.86),.28);amb=mix(amb,vec3(.56,.45,.35),.16);
+  amb=mix(amb,vec3(lum(amb))*vec3(1.1,.97,.86),.28);amb=mix(amb,vec3(.56,.45,.35),.16);}
   // Approach already carries some of the amber; at the end of About the gold cools toward the burgundy
   brown=mix(brown,amb*.86,.55*smoothstep(0.,1.,uS6));
   vec3 ambC=mix(amb,vec3(lum(amb))*vec3(1.1,.88,.82),.5);
   vec3 sand=mix(amb,ambC,smoothstep(0.,1.,uS7));
   // muted burgundy for Contact
-  vec3 bm=mix(texture2D(uSoft,cover(p,A,.5)+drift).rgb*.78,vec3(.118,.063,.059),.2);
+  vec3 bm=vec3(.118,.063,.059);
+  if(uS4>.0005){
+  bm=mix(texture2D(uSoft,cover(p,A,.5)+drift).rgb*.78,vec3(.118,.063,.059),.2);
   // Contact keeps a faint trace of the amber light in its upper corner
-  bm=mix(bm,amb*.66,.3*smoothstep(1.05,.05,length((p-vec2(.12,.08))*vec2(A,1.))));
+  bm=mix(bm,amb*.66,.3*smoothstep(1.05,.05,length((p-vec2(.12,.08))*vec2(A,1.))));}
   vec3 base=bur;float gAdd=.13,gMul=0.;
   float k1=smoothstep(0.,1.,uS1);
   base=mix(base,d2,k1);gAdd=mix(gAdd,.03,k1);gMul=mix(gMul,.22,k1);
@@ -798,7 +805,10 @@ void main(){
   vec3 cream=sand;
   // the first screen gets a degree lighter at its end
   base=mix(base,base*1.08+vec3(.025,.018,.014),uS5*10.*(1.-k1)*.6);
-  // relief
+  // relief (only where the trail has revealed it)
+  float reveal=smoothstep(.02,.85,texture2D(uM,p).r);
+  float shade=0.,sp=0.,lit=0.,att=0.;
+  if(reveal>.002){
   vec2 X=p*uRes;vec2 ts=vec2(uTile*.5625,uTile);
   vec2 tr=vec2((X.x-uRes.x*.5)/ts.x+.5,(X.y+uScroll*uRes.y*.12)/ts.y);
   vec4 r=texture2D(uRel,vec2(tri(tr.x),tri(tr.y)));
@@ -806,11 +816,10 @@ void main(){
   vec3 n=normalize(vec3(-g,1.));
   vec2 dpx=(uL-p)*uRes;float dist=length(dpx);
   vec3 Ld=normalize(vec3(dpx,uZ));float rel=dot(n,Ld)-Ld.z;
-  vec3 Hh=normalize(Ld+vec3(0.,0.,1.));float sp=max(pow(max(dot(n,Hh),0.),40.)-pow(Hh.z,40.),0.);
-  float reveal=smoothstep(.02,.85,texture2D(uM,p).r);
-  float att=1./(1.+pow(dist/(uZ*1.2),2.));
-  float lit=reveal*(.4+.6*att);
-  float shade=det*1.7+rel*1.05;
+  vec3 Hh=normalize(Ld+vec3(0.,0.,1.));sp=max(pow(max(dot(n,Hh),0.),40.)-pow(Hh.z,40.),0.);
+  att=1./(1.+pow(dist/(uZ*1.2),2.));
+  lit=reveal*(.4+.6*att);
+  shade=det*1.7+rel*1.05;}
   vec3 hl=mix(vec3(.80,.62,.46),vec3(.88,.76,.58),k1);
   vec3 cd=base;
   cd*=1.+min(shade,0.)*1.5*lit;
@@ -877,7 +886,8 @@ function drawMask(now){
   mctx.globalAlpha=1;
 }
 addEventListener('pointermove',e=>{if(e.pointerType==='mouse'||e.pointerType==='pen'||!e.pointerType){userMoved=true;ghost=null;pushPt(e.clientX,e.clientY,performance.now()/1000)}},{passive:true});
-addEventListener('touchmove',()=>{userMoved=true},{passive:true});
+addEventListener('touchstart',e=>{const t=e.touches[0];if(t){userMoved=true;ghost=null;ptr.has=false;pushPt(t.clientX,t.clientY,performance.now()/1000)}},{passive:true});
+addEventListener('touchmove',e=>{const t=e.touches[0];if(t){userMoved=true;ghost=null;pushPt(t.clientX,t.clientY,performance.now()/1000)}},{passive:true});
 addEventListener('touchend',()=>{ptr.has=false},{passive:true});
 document.addEventListener('mouseleave',()=>{ptr.has=false});
 
@@ -885,7 +895,6 @@ let theme=0,dimV=0;const bgS=[0,0,0,0,0,0,0];
 let glLast=0,maskLive=true;
 function renderGL(now){
   if(!hasGL)return;
-  if(MOB&&now-glLast<.032)return;glLast=now;
   const maskOn=trail.length>0||maskLive;maskLive=trail.length>0;
   if(maskOn)drawMask(now);
   if(ptr.has||trail.length){const p=ptr.has?ptr:trail[trail.length-1];light.x+=(p.x/vw-light.x)*.14;light.y+=(p.y/vh-light.y)*.14}
