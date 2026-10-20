@@ -2,7 +2,7 @@
 <html lang="en" class="lock">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,viewport-fit=cover">
 <title>Raykhan Aytmuratova</title>
 <link rel="icon" type="image/png" href="{{FAV}}">
 <link rel="apple-touch-icon" href="{{FAV180}}">
@@ -43,7 +43,8 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html.lock,html.lock body{overflow:hidden}
 html,body{background:#2A0C0D}
-body{color:var(--cream);font-family:var(--serif);-webkit-font-smoothing:antialiased;overflow-x:clip}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{color:var(--cream);font-family:var(--serif);-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip}
 body[data-theme="light"]{--fg:var(--ink)}
 a{color:inherit}button{font:inherit;color:inherit}
 img{max-width:none}
@@ -317,7 +318,9 @@ body.caseon #hdr,body.caseon .key,body.caseon .kn{visibility:hidden}
   .cap .open{grid-column:2;justify-self:start;margin-top:16px}
   .cap .sub{max-width:none}
   .wk-prog{display:none}
-  #hdr::before{content:"";position:absolute;left:0;right:0;top:0;height:112px;background:linear-gradient(to bottom,rgba(30,13,11,.58),rgba(30,13,11,.3) 55%,rgba(30,13,11,0));-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent);opacity:0;transition:opacity .6s}
+  #hdr::before{content:"";position:absolute;left:0;right:0;top:0;height:112px;background:linear-gradient(to bottom,rgba(30,13,11,.58),rgba(30,13,11,.3) 55%,rgba(30,13,11,0));-webkit-backdrop-filter:none;backdrop-filter:none;-webkit-mask-image:none;mask-image:none;bottom:auto;opacity:0;transition:opacity .6s}
+  #case .x{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(20,12,10,.72)}
+  #case::after{mix-blend-mode:normal;opacity:.1}
   body.docked #hdr::before{opacity:1}
   #cbody,#cbody .cs-info,#cbody .cs-info>div,#cbody .cs-lead{grid-template-columns:minmax(0,1fr);column-gap:0}
   #cbody>*,#cbody .cs-info>*,#cbody .cs-info>div>*,#cbody .cs-lead>*{grid-column:1/-1}
@@ -328,7 +331,7 @@ body.caseon #hdr,body.caseon .key,body.caseon .kn{visibility:hidden}
   #contact .caps.eye{margin-top:3vh}
   #contact h2{margin-top:2.4vh;font-size:clamp(30px,8.6vw,38px)}
   .mail{margin-top:4.5vh;gap:18px}
-  .mail .addr{font-size:clamp(20px,6vw,26px)}
+  .mail .addr{font-size:clamp(20px,6vw,26px);max-width:calc(100vw - 2*var(--m));overflow-wrap:anywhere}
   .tgu{font-size:clamp(20px,6vw,26px)}
   .cs-t{font-size:clamp(72px,22vw,96px)}
   .cs-sub{font-size:20px}
@@ -495,7 +498,8 @@ const H=document.documentElement,B=document.body;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,coarse=matchMedia('(hover: none)').matches;
 const IMG={tempo:"{{TEMPO}}",usty:"{{USTY}}",sav:"{{SAV0}}",sav1:"{{SAV1}}",sav2:"{{SAV2}}",sav3:"{{SAV3}}",pl:"{{PL0}}",pl1:"{{PL1}}",pl2:"{{PL2}}",us1:"{{US1}}",us2:"{{US2}}",us3:"{{US3}}",tp1:"{{TP1}}",tp2:"{{TP2}}",tp3:"{{TP3}}",yo0:"{{YO0}}",yo1:"{{YO1}}",yo2:"{{YO2}}"};
 const META={{META}},MASK_SRC="{{MASK}}",SOFT_SRC="{{BGSOFT}}",REL_SRC="{{RELIEF}}",D1_SRC="{{DUNE1}}",D2_SRC="{{DUNE2}}",AMB_SRC="{{AMBER}}";
-let lenis=null,vw=innerWidth,vh=innerHeight;const MOB=matchMedia('(hover: none) and (pointer: coarse)').matches||innerWidth<700;document.documentElement.style.setProperty('--vh',vh+'px');
+const docW=()=>document.documentElement.clientWidth||innerWidth;
+let lenis=null,vw=docW(),vh=innerHeight;const MOB=matchMedia('(hover: none) and (pointer: coarse)').matches||vw<700;document.documentElement.style.setProperty('--vh',vh+'px');
 
 /* ===== PROJECTS: add one object here and the gallery + case page are built from it ===== */
 /* Each case page opens in the colours of its own project:
@@ -626,7 +630,7 @@ const rl=[];(function splitRoles(){const R=mulberry(41);
   $$('#roles span').forEach(sp=>{const t=sp.textContent;sp.textContent='';for(const c of t){const e=document.createElement('span');e.className='rl';e.textContent=c===' '?' ':c;sp.appendChild(e);rl.push({el:e,r:R(),r2:R(),tx:0,ty:0})}})})();
 const rdots=$$('#roles i');let logoDrawn=false;
 const pinLen=()=>Math.max(1,heroEl.offsetHeight-vh);
-const MS_={};let nLines=1;
+const MS_={};let nLines=1,mfForce=true,mfKey='';
 const A_IN=[.17,.52],O_OUT=[.6,.75];      // text rises / text leaves (fractions of the pinned scroll)
 function layoutMF(){
   const sT=vw<700?.6:.5,x0=Math.min(0,LEADMIN);
@@ -662,7 +666,10 @@ function layoutMF(){
   rl.forEach(r=>{if(!r.el.textContent.trim()){r.tx=0;r.ty=0;r.st=0;r.dur=.04;r.sc=1}});
   keys.forEach(kk=>{kk.line=words[kk.wi].line;kk.st=words[kk.wi].st;kk.el.style.fontSize='100px';kk.el.style.letterSpacing='0px';
     if(kk.k1){kk.k1.style.maxWidth='none';kk.k2.style.maxWidth='none';kk.w1=kk.k1.offsetWidth/100+.3;kk.w2=kk.k2.offsetWidth/100+.3;kk.k1.style.display='none';kk.w0=kk.el.offsetWidth/100;kk.k1.style.display=''}
-    else kk.w0=kk.el.offsetWidth/100});
+    else kk.w0=kk.el.offsetWidth/100;
+    // back to a small size at once: a 100px word parked off-screen must never widen the page
+    kk.el.style.fontSize='10.5px';kk.fs0=parseFloat(getComputedStyle(kk.ph).fontSize)});
+  mfForce=true;
   const sr=stage.getBoundingClientRect();
   // menu in the centre
   const FSm=vw<700?24:clamp(vw*.026,26,42),lh=FSm*1.9,LSm=.16;MS_.FSm=FSm;
@@ -679,6 +686,8 @@ function layoutMF(){
   if(vw<480){keys.forEach((kk,i)=>{const w=FSh*(kk.w0+kk.n*LSh);kk.hx=vw-20-w+FSh*LSh;kk.hy=26+i*16})}
 }
 function setMF(P,off){
+  // nothing to redraw while the page stands still
+  const key=P.toFixed(5)+'|'+Math.round(off)+'|'+B.classList.contains('ready');if(!mfForce&&key===mfKey)return;mfForce=false;mfKey=key;
   // letters of the roles drift into the first lines and dissolve as the words appear
   rl.forEach(r=>{const e=eioS(rg(P,r.st,r.st+r.dur)),arrived=P>=r.st+r.dur;
     r.el.style.transform=e?`translate(${(r.tx*e).toFixed(1)}px,${(r.ty*e).toFixed(1)}px) scale(${(1+(r.sc-1)*e).toFixed(3)})`:'';
@@ -694,21 +703,21 @@ function setMF(P,off){
     const ls=O_OUT[0]+(O_OUT[1]-O_OUT[0]-.06)*(w.line/Math.max(1,nLines-1)),oo=sstep(0,1,rg(P,ls,ls+.06));
     w.el.style.opacity=(e*(1-oo)).toFixed(3);
     w.el.style.transform=(e<1||(oo>0&&!w.key))?`translateY(${((1-e)*6-(w.key?0:oo*14)).toFixed(1)}px)`:'none';
-    w.el.style.filter=e<1?`blur(${((1-e)*3).toFixed(2)}px)`:'';
+    w.el.style.filter=e<1&&!MOB?`blur(${((1-e)*3).toFixed(2)}px)`:'';
   });
   const tH=eioS(rg(off,vh*.02,vh*1.0)),sr=stage.getBoundingClientRect();
   keys.forEach((kk,i)=>{
     const e=1-Math.pow(1-rg(P,kk.st,kk.st+.07),2);
     const ti=eio(rg(P,O_OUT[1]-.02+i*.03,O_OUT[1]+.1+i*.03));
     // the marked word sits exactly over its place in the text (measured live, so spacing always matches)
-    const r=kk.ph.getBoundingClientRect(),fs0=parseFloat(getComputedStyle(kk.ph).fontSize);
+    const r=kk.ph.getBoundingClientRect(),fs0=kk.fs0||parseFloat(getComputedStyle(kk.ph).fontSize);
     const px=r.left,py=r.top-sr.top;
     let x=mix(px,kk.mx,ti),y=mix(py,kk.my,ti),fs=mix(fs0,MS_.FSm,ti),ls=mix(.12,.16,ti);
     x=mix(x,kk.hx,tH);y=mix(y,kk.hy,tH);fs=mix(fs,10.5,tH);ls=mix(ls,.26,tH);
     const es=kk.el.style;es.fontSize=fs.toFixed(2)+'px';es.letterSpacing=ls+'em';
     if(kk.k1){const q=sstep(.15,.85,ti);kk.k1.style.maxWidth=((1-q)*kk.w1).toFixed(3)+'em';kk.k1.style.opacity=(1-q).toFixed(3);kk.k2.style.maxWidth=(q*kk.w2).toFixed(3)+'em';kk.k2.style.opacity=q.toFixed(3)}
     es.transform=`translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`;
-    es.opacity=e.toFixed(3);es.filter=e<1?`blur(${((1-e)*3).toFixed(2)}px)`:'';
+    es.opacity=e.toFixed(3);es.filter=e<1&&!MOB?`blur(${((1-e)*3).toFixed(2)}px)`:'';
     es.pointerEvents=(ti>.97||tH>.5)?'auto':'none';
     const ns=kk.num.style;ns.transform=`translate(${MS_.nx.toFixed(1)}px,${(kk.my+MS_.FSm*.42-5).toFixed(1)}px)`;
     ns.opacity=(sstep(.3,1,rg(P,O_OUT[1]+.04+i*.03,O_OUT[1]+.14+i*.03))*(1-rg(off,0,vh*.35))).toFixed(3);
@@ -873,14 +882,17 @@ addEventListener('touchend',()=>{ptr.has=false},{passive:true});
 document.addEventListener('mouseleave',()=>{ptr.has=false});
 
 let theme=0,dimV=0;const bgS=[0,0,0,0,0,0,0];
+let glLast=0,maskLive=true;
 function renderGL(now){
   if(!hasGL)return;
-  drawMask(now);
+  if(MOB&&now-glLast<.032)return;glLast=now;
+  const maskOn=trail.length>0||maskLive;maskLive=trail.length>0;
+  if(maskOn)drawMask(now);
   if(ptr.has||trail.length){const p=ptr.has?ptr:trail[trail.length-1];light.x+=(p.x/vw-light.x)*.14;light.y+=(p.y/vh-light.y)*.14}
-  const dpr=Math.min(devicePixelRatio||1,1.5),cw=Math.round(vw*dpr),ch=Math.round(vh*dpr);
+  const dpr=MOB?Math.min(devicePixelRatio||1,.8):Math.min(devicePixelRatio||1,1.5),cw=Math.round(vw*dpr),ch=Math.round(vh*dpr);
   if(glc.width!==cw||glc.height!==ch){glc.width=cw;glc.height=ch}
   gl.viewport(0,0,cw,ch);
-  gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,texM);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,maskC);
+  if(maskOn){gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,texM);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,maskC)}
   const heroOff=scrollY;
   gl.uniform2f(U.uRes,vw,vh);gl.uniform2f(U.uL,light.x,light.y);gl.uniform2f(U.uC,L.curCx||vw/2,(L.curCy||vh/2)-Math.max(0,heroOff-pinLen()));
   gl.uniform1f(U.uDpr,dpr);gl.uniform1f(U.uZ,Math.max(42,Math.min(vw,vh)*.05));gl.uniform1f(U.uT,now);
@@ -1084,11 +1096,11 @@ function frame(ts){
   renderGL(now);
 }
 function layout(){
-  vw=innerWidth;vh=innerHeight;document.documentElement.style.setProperty('--vh',vh+'px');layoutHero();logoDrawn=false;layoutMF();layoutWork();layoutAP();measure();initMask();
+  vw=docW();vh=innerHeight;document.documentElement.style.setProperty('--vh',vh+'px');layoutHero();logoDrawn=false;layoutMF();layoutWork();layoutAP();measure();initMask();
   if(finished)place(L.ox1,L.oy1);
 }
 // on phones the address bar changes the height while scrolling: only a new width (rotation) relayouts
-let rz;addEventListener('resize',()=>{if(MOB&&innerWidth===vw)return;clearTimeout(rz);rz=setTimeout(layout,150)});
+let rz;addEventListener('resize',()=>{if(MOB&&docW()===vw)return;clearTimeout(rz);rz=setTimeout(layout,150)});
 
 async function boot(){
   history.scrollRestoration='manual';scrollTo(0,0);if(ST.skip)document.documentElement.classList.remove('lock');
