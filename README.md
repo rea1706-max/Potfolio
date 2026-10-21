@@ -1,7 +1,9 @@
 # Raykhan Aytmuratova — portfolio
 
-One self-contained page: `src/index.src.html` plus the fonts and images in `assets/`.
-`python3 build.py` inlines everything into `index.html`.
+`src/index.src.html` plus the fonts and images in `assets/`.
+`python3 build.py` writes a light `index.html` and `a/` — every font and image as its own
+WebP/woff2 file with a content hash in its name, so the first screen opens at once and
+repeat visits load from cache. Commit both `index.html` and `a/`.
 
 ## Deploy
 

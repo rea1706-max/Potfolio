@@ -3,6 +3,9 @@
 set -e
 cd /opt/portfolio-src
 mkdir -p /var/www/portfolio
+# assets first (new hashed files), then the page that points to them
+rm -rf /var/www/portfolio/a.new && cp -r a /var/www/portfolio/a.new
+rm -rf /var/www/portfolio/a && mv /var/www/portfolio/a.new /var/www/portfolio/a
 cp index.html favicon.ico /var/www/portfolio/
 rm -rf /var/www/portfolio/yohaku
 cp -r yohaku /var/www/portfolio/yohaku

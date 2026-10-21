@@ -6,27 +6,33 @@
 <title>Raykhan Aytmuratova</title>
 <link rel="icon" type="image/png" href="{{FAV}}">
 <link rel="apple-touch-icon" href="{{FAV180}}">
+<link rel="preload" as="image" href="{{PARD}}">
+<link rel="preload" as="font" type="font/woff2" href="{{F_BANTLEY}}" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="{{F_CINZEL}}" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="{{F_NR300}}" crossorigin>
+<link rel="preload" as="image" href="{{MASK}}">
+<link rel="preload" as="image" href="{{BGSOFT}}">
 <style>
-@font-face{font-family:'pf-zen';src:url(data:font/woff2;base64,{{PF_ZEN}}) format('woff2');font-display:swap}
-@font-face{font-family:'pf-ship';src:url(data:font/woff2;base64,{{PF_SHIP}}) format('woff2');font-display:swap}
-@font-face{font-family:'pf-corm';src:url(data:font/woff2;base64,{{PF_CORM}}) format('woff2');font-display:swap}
-@font-face{font-family:'pf-dm';src:url(data:font/woff2;base64,{{PF_DM}}) format('woff2');font-display:swap}
-@font-face{font-family:'pf-play';src:url(data:font/woff2;base64,{{PF_PLAY}}) format('woff2');font-display:swap}
-@font-face{font-family:'pf-inter';src:url(data:font/woff2;base64,{{PF_INTER}}) format('woff2');font-display:swap}
-@font-face{font-family:'pf-prata';src:url(data:font/woff2;base64,{{PF_PRATA}}) format('woff2');font-display:swap}
-@font-face{font-family:'pf-golos';src:url(data:font/woff2;base64,{{PF_GOLOS}}) format('woff2');font-display:swap}
-@font-face{font-family:"Bantley";font-weight:400;font-display:block;src:url(data:font/woff2;base64,{{F_BANTLEY}}) format("woff2")}
-@font-face{font-family:"Newsreader";font-weight:300;font-style:normal;font-display:swap;src:url(data:font/woff2;base64,{{F_SP300}}) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:"Newsreader";font-weight:400;font-style:normal;font-display:swap;src:url(data:font/woff2;base64,{{F_SP400}}) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:"Newsreader";font-weight:300;font-style:italic;font-display:swap;src:url(data:font/woff2;base64,{{F_SP300I}}) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:"Newsreader";font-weight:400;font-style:italic;font-display:swap;src:url(data:font/woff2;base64,{{F_SP400I}}) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:"Cinzel";font-weight:400 900;font-display:block;src:url(data:font/woff2;base64,{{F_FORUM}}) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:"Bantley";font-weight:400;font-display:block;src:url(data:font/woff2;base64,{{F_GV}}) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
-@font-face{font-family:"Cinzel";font-weight:400 900;font-display:block;src:url(data:font/woff2;base64,{{F_CINZEL}}) format("woff2")}
-@font-face{font-family:"Newsreader";font-weight:300;font-style:normal;font-display:swap;src:url(data:font/woff2;base64,{{F_NR300}}) format("woff2")}
-@font-face{font-family:"Newsreader";font-weight:400;font-style:normal;font-display:swap;src:url(data:font/woff2;base64,{{F_NR400}}) format("woff2")}
-@font-face{font-family:"Newsreader";font-weight:300;font-style:italic;font-display:swap;src:url(data:font/woff2;base64,{{F_NR300I}}) format("woff2")}
-@font-face{font-family:"Newsreader";font-weight:400;font-style:italic;font-display:swap;src:url(data:font/woff2;base64,{{F_NR400I}}) format("woff2")}
+@font-face{font-family:'pf-zen';src:url({{PF_ZEN}}) format('woff2');font-display:swap}
+@font-face{font-family:'pf-ship';src:url({{PF_SHIP}}) format('woff2');font-display:swap}
+@font-face{font-family:'pf-corm';src:url({{PF_CORM}}) format('woff2');font-display:swap}
+@font-face{font-family:'pf-dm';src:url({{PF_DM}}) format('woff2');font-display:swap}
+@font-face{font-family:'pf-play';src:url({{PF_PLAY}}) format('woff2');font-display:swap}
+@font-face{font-family:'pf-inter';src:url({{PF_INTER}}) format('woff2');font-display:swap}
+@font-face{font-family:'pf-prata';src:url({{PF_PRATA}}) format('woff2');font-display:swap}
+@font-face{font-family:'pf-golos';src:url({{PF_GOLOS}}) format('woff2');font-display:swap}
+@font-face{font-family:"Bantley";font-weight:400;font-display:block;src:url({{F_BANTLEY}}) format("woff2")}
+@font-face{font-family:"Newsreader";font-weight:300;font-style:normal;font-display:swap;src:url({{F_SP300}}) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Newsreader";font-weight:400;font-style:normal;font-display:swap;src:url({{F_SP400}}) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Newsreader";font-weight:300;font-style:italic;font-display:swap;src:url({{F_SP300I}}) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Newsreader";font-weight:400;font-style:italic;font-display:swap;src:url({{F_SP400I}}) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Cinzel";font-weight:400 900;font-display:block;src:url({{F_FORUM}}) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Bantley";font-weight:400;font-display:block;src:url({{F_GV}}) format("woff2");unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Cinzel";font-weight:400 900;font-display:block;src:url({{F_CINZEL}}) format("woff2")}
+@font-face{font-family:"Newsreader";font-weight:300;font-style:normal;font-display:swap;src:url({{F_NR300}}) format("woff2")}
+@font-face{font-family:"Newsreader";font-weight:400;font-style:normal;font-display:swap;src:url({{F_NR400}}) format("woff2")}
+@font-face{font-family:"Newsreader";font-weight:300;font-style:italic;font-display:swap;src:url({{F_NR300I}}) format("woff2")}
+@font-face{font-family:"Newsreader";font-weight:400;font-style:italic;font-display:swap;src:url({{F_NR400I}}) format("woff2")}
 
 /* Type system: Bantley = the name and section titles (script, display only)
    Cinzel = labels, navigation, roles, small caps (always tracked)
@@ -404,7 +410,7 @@ body.caseon #hdr,body.caseon .key,body.caseon .kn{visibility:hidden}
 </div></section>
 
 <section id="contact">
-  <img class="pm rv" src="{{PARD}}" alt="">
+  <img class="pm rv" src="{{PARD}}" alt="" loading="lazy" decoding="async">
   <div class="caps eye rv">Contact</div>
   <h2 class="rv">Let’s make something<span>they can’t <em class="sc" id="scw">scroll</em> past.</span></h2>
   <div class="mail rv"><a class="addr" href="mailto:withloveraykhan@gmail.com">withloveraykhan@gmail.com</a><button class="pill" id="copy" type="button">Copy address</button><a class="tg" href="https://t.me/Rayanakhan" target="_blank" rel="noopener"><span class="caps">Telegram</span><span class="tgu">@Rayanakhan</span></a></div>
@@ -850,15 +856,14 @@ async function initGL(){
     const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
     const a=gl.getAttribLocation(pr,'a');gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,2,gl.FLOAT,false,0,0);
     for(const n of['uSoft','uRel','uM','uD1','uD2','uRes','uL','uC','uDpr','uZ','uT','uAsp','uTile','uDim','uScroll','uS1','uS2','uS3','uS4','uS5','uS6','uS7','uAmb'])U[n]=gl.getUniformLocation(pr,n);
-    const [s,r,d1,d2,am]=await Promise.all([loadImg(SOFT_SRC),loadImg(REL_SRC),loadImg(D1_SRC),loadImg(D2_SRC),loadImg(AMB_SRC)]);softAsp=s.width/s.height;
+    const s=await loadImg(SOFT_SRC);softAsp=s.width/s.height;
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);
     gl.activeTexture(gl.TEXTURE0);texSoft=mkTex();gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,s);
-    gl.activeTexture(gl.TEXTURE1);texRel=mkTex();gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,r);
     gl.activeTexture(gl.TEXTURE2);texM=mkTex();
-    gl.activeTexture(gl.TEXTURE3);mkTex();gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,d1);
-    gl.activeTexture(gl.TEXTURE4);mkTex();gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,d2);
-    gl.uniform1i(U.uSoft,0);gl.uniform1i(U.uRel,1);gl.uniform1i(U.uM,2);gl.uniform1i(U.uD1,3);gl.uniform1i(U.uD2,4);
-    gl.activeTexture(gl.TEXTURE5);mkTex();gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,am);gl.uniform1i(U.uAmb,5);
+    const later=(unit,src,set,c=[36,23,19])=>{gl.activeTexture(gl.TEXTURE0+unit);const t=mkTex();gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,1,1,0,gl.RGB,gl.UNSIGNED_BYTE,new Uint8Array(c));gl.uniform1i(set,unit);
+      loadImg(src).then(im=>{gl.activeTexture(gl.TEXTURE0+unit);gl.bindTexture(gl.TEXTURE_2D,t);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,im)}).catch(()=>{})};
+        gl.uniform1i(U.uSoft,0);gl.uniform1i(U.uM,2);
+    later(1,REL_SRC,U.uRel,[128,128,128]);later(3,D1_SRC,U.uD1);later(4,D2_SRC,U.uD2);later(5,AMB_SRC,U.uAmb);
     hasGL=true;
   }catch(e){console.warn('webgl off',e);hasGL=false;B.style.background='radial-gradient(90% 70% at 60% 40%,#5a2a22 0%,#3a0c0e 45%,#1f0909 100%)'}
 }
@@ -945,7 +950,7 @@ addEventListener('keydown',e=>{if(['ArrowDown','PageDown',' ','End'].includes(e.
    ===================================================================== */
 const track=$('#track'),workEl=$('#work'),wkp=$('#wkp');let cards=[],trackW=0;
 function buildWork(){
-  track.innerHTML='<div class="wk-head"><div class="caps">'+T.selected+'</div><h2>'+T.works+'</h2></div>'+PROJECTS.map((p,i)=>`<article class="pc" data-i="${i}"><div class="fr" style="--fl:${p.frame.fl};--fl2:${p.frame.fl2};--fm:${p.frame.fm};--fd:${p.frame.fd}"><div class="im" data-id="${p.id}"><img src="${p.img}" alt="${p.title}"></div></div><div class="cap"><span class="num">${String(i+1).padStart(2,'0')}</span><div><h3>${p.title}</h3><p class="cat">${p.cat}</p><p class="sub">${p.sub}</p>${p.url?`<a class="visit" href="${p.url}" target="_blank" rel="noopener">${T.visit} <span>↗</span></a>`:''}</div><button class="pill open" data-id="${p.id}" type="button">${T.open}</button></div></article>`).join('')+'<article class="pc pc-end"><div class="fr"><a class="im" href="#contact"><span class="ring">+</span></a></div><div class="cap"><span class="num"></span><div><h3>'+T.yours+'</h3><p class="sub">'+nb(T.yoursSub)+'</p></div></div></article>';
+  track.innerHTML='<div class="wk-head"><div class="caps">'+T.selected+'</div><h2>'+T.works+'</h2></div>'+PROJECTS.map((p,i)=>`<article class="pc" data-i="${i}"><div class="fr" style="--fl:${p.frame.fl};--fl2:${p.frame.fl2};--fm:${p.frame.fm};--fd:${p.frame.fd}"><div class="im" data-id="${p.id}"><img src="${p.img}" alt="${p.title}" loading="lazy" decoding="async"></div></div><div class="cap"><span class="num">${String(i+1).padStart(2,'0')}</span><div><h3>${p.title}</h3><p class="cat">${p.cat}</p><p class="sub">${p.sub}</p>${p.url?`<a class="visit" href="${p.url}" target="_blank" rel="noopener">${T.visit} <span>↗</span></a>`:''}</div><button class="pill open" data-id="${p.id}" type="button">${T.open}</button></div></article>`).join('')+'<article class="pc pc-end"><div class="fr"><a class="im" href="#contact"><span class="ring">+</span></a></div><div class="cap"><span class="num"></span><div><h3>'+T.yours+'</h3><p class="sub">'+nb(T.yoursSub)+'</p></div></div></article>';
   $$('.im[data-id]',track).forEach(el=>el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--lx',(e.clientX-r.left)+'px');el.style.setProperty('--ly',(e.clientY-r.top)+'px')}));
 }
 function layoutWork(){if(vw<700){workEl.style.height='';track.style.transform='';cards=$$('.pc',track).map(el=>({el,img:$('img',el)}));cards.forEach(c=>{c.el.style.transform='';c.el.style.opacity='';if(c.img)c.img.style.transform=''});trackW=0;return}trackW=track.scrollWidth;workEl.style.height=Math.max(vh*1.5,trackW-vw+vh)+'px';cards=$$('.pc',track).map(el=>({el,img:$('img',el)}))}
@@ -1061,7 +1066,7 @@ function renderCase(i){
   <div class="cs-meta rv"><div><b>${T.cs.cat}</b><span>${p.cat}</span></div><div><b>${T.cs.role}</b><span>${p.role}</span></div><div><b>${T.cs.tools}</b><span>${p.tools}</span></div><div><b>${T.cs.year}</b><span>${p.year}</span></div><div><b>${T.cs.time}</b><span>${p.time||'—'}</span></div></div>
   <div class="cs-lead rv"><b>${T.cs.task}</b><p>${p.brief}</p></div>
   <div class="cs-cover rv">${fr(`<img src="${p.img}" alt="${p.title}, ${T.cs.shot}">`)}</div>
-  <div class="cs-gal rv${p.shots&&p.shots.length==2?' two':''}">${(p.shots||[]).map(u=>fr(`<div class="crop"><img src="${u}" alt="${p.title}"></div>`)).join('')}</div>
+  <div class="cs-gal rv${p.shots&&p.shots.length==2?' two':''}">${(p.shots||[]).map(u=>fr(`<div class="crop"><img src="${u}" alt="${p.title}" loading="lazy" decoding="async"></div>`)).join('')}</div>
   <div class="cs-info">
    <div class="cs-fonts rv"><div class="k">${T.cs.fonts}</div><div class="v">${p.fonts?p.fonts.map(([n,fam,r])=>`<div class="row"><span class="nm" style="font-family:'${fam}',${/Sans|Inter|Golos|Arial|Gothic/.test(n)?'sans-serif':'serif'}">${n}</span><span class="rl">${T.cs[r]}</span></div>`).join(''):'<span class="cs-dash">—</span>'}</div></div>
    <div class="rv"><div class="k">${T.cs.cols}</div><div class="v"><div class="cs-pal" id="cpal"></div></div></div>
