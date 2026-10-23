@@ -7,6 +7,7 @@ mkdir -p /var/www/portfolio
 rm -rf /var/www/portfolio/a.new && cp -r a /var/www/portfolio/a.new
 rm -rf /var/www/portfolio/a && mv /var/www/portfolio/a.new /var/www/portfolio/a
 cp index.html favicon.ico /var/www/portfolio/
+cp robots.txt sitemap.xml /var/www/portfolio/ 2>/dev/null || true
 rm -rf /var/www/portfolio/yohaku
 cp -r yohaku /var/www/portfolio/yohaku
 cp deploy/nginx.conf /etc/nginx/sites-available/portfolio

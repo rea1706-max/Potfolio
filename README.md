@@ -14,4 +14,4 @@ The server checks this repository every minute and publishes each new push to `m
 curl -fsSL https://raw.githubusercontent.com/rea1706-max/potfolio/main/deploy/install.sh | sudo bash
 ```
 
-Live: http://82.115.51.36/
+Live: https://raykhan.uz/
